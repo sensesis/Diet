@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link. href="/main.css" rel="stylesheet">
+    </link.>
+</head>
+<body>
+<div class="card" th:each="i : ${events}">
+    <img src="https://placehold.co/300">
+    <div>
+        <h4 th:text="${i.id}"></h4>
+        <h4 th:text="${i.text}"></h4>
+        <h4 th:text="${i.date}"></h4>
+    </div>
+</div>
+</body>
+</html>

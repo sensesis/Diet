@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link. href="/main.css" rel="stylesheet">
+  </link.>
+</head>
+<body>
+
+<div th:replace="~{nav.html :: navbar}"></div>
+
+<!--<form action="/edit" method="POST">-->
+<!--&lt;!&ndash;  <input name="id" th:value="${data.id}" style="desplay:none">&ndash;&gt;-->
+<!--&lt;!&ndash;  <input name="name" th:value="${data.name}">&ndash;&gt;-->
+<!--&lt;!&ndash;  <input name="tyoe" th:value="${data.tyoe}">&ndash;&gt;-->
+<!--  <button type="submit">전송</button>-->
+<form action="/edit" method="POST">
+  <input name="id" th:value="${data.id}" style="display:none">
+  <input name="name" th:value="${data.name}">
+  <input name="type" th:value="${data.type}">
+  <button type="submit">전송</button>
+</form>
+</form>
+</body>
+</html>
