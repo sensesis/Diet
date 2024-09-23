@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link. href="/main.css" rel="stylesheet">
+  </link.>
+</head>
+<body>
+
+<div th:replace="~{nav.html :: navbar}"></div>
+
+<h4>로그인하세요</h4>
+
+<div th:if="${param.error}">
+  <h4>아이디나 비번 틀림 ㅋㅋ</h4>
+</div>
+
+<form action="/login" method="POST">
+  <input name="email">
+  <input name="password" type="password">
+  <button type="submit">전송</button>
+</form>
+
+<form>
+  <input name="email" id="email">
+  <input name="password" type="password" id="password">
+</form>
+
+<button onclick="loginJWT()">JWT방식로그인</button>
+
+<script>
+  function loginJWT(){
+    fetch('/login/jwt', {
+      method : 'POST',
+      headers : {'Content-Type': 'application/json'},
+      body : JSON.stringify({
+        email : document.querySelector('#email').value,
+        password : document.querySelector('#password').value
+      })
+    }).then(r => r.text()).then((r)=>{ console.log(r) })
+  }
+</script>
