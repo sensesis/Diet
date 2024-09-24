@@ -3,9 +3,12 @@
 /out/
 
 # IDE 설정 파일
+.idea/gradle.xml
 .idea/
 *.iml
 
 # OS별 파일
 .DS_Store
 Thumbs.db
+
+
