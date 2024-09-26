@@ -1,0 +1,36 @@
+springdoc:
+  swagger-ui:
+    # Swagger UI 접근 경로. 기본값은 /swagger-ui.html
+    path: /swagger-custom-ui.html
+
+    # API 그룹 표시 순서
+    groups-order: DESC
+
+    # 태그 정렬 방식
+    tags-sorter: alpha
+
+    # 컨트롤러 정렬 방식
+    operations-sorter: method
+
+    # Swagger UI의 기본 URL인 Petstore HTML 비활성화
+    disable-swagger-default-url: true
+
+    # Try it out 시 request duration 표시
+    display-request-duration: true
+
+  # OpenAPI 접근 경로. 기본값은 /v3/api-docs
+  api-docs:
+    path: /api-docs
+
+  # Spring Actuator의 엔드포인트도 Swagger에 포함
+  show-actuator: true
+
+  # 기본 request media type
+  default-consumes-media-type: application/json
+
+  # 기본 response media type
+  default-produces-media-type: application/json
+
+  # Swagger UI에 노출할 컨트롤러 경로 패턴
+  paths-to-match:
+    - /api/**

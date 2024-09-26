@@ -1,28 +1,7 @@
 services:
-  database:
-    image: mysql:8.0
-    container_name: diet_db
-    environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-    ports:
-      - "3306:3306"
-    volumes:
-      - ./db/data:/var/lib/mysql
-    networks:
-      - diet_network
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
   webapp:
     build:
       context: ./backend
-    restart: always
     depends_on:
       database:
         condition: service_healthy
@@ -36,6 +15,26 @@ services:
       - SPRING_PROFILES_ACTIVE=dev
     networks:
       - diet_network
+
+  database:
+    image: mysql:8.0
+    container_name: diet_db
+    environment:
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db/diet_data:/var/lib/mysql
+    networks:
+      - diet_network
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
   diet_network:

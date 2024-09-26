@@ -1,5 +1,6 @@
-package com.apple.shop.cream;
+package com.apple.shop.Util;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,30 +10,32 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration // 설정파일, 정의할 때 쓰는 어노테이션
-@EnableWebSecurity // Spring Security 활성 어노테이션 -> 보안 적용
-public class SecurityConfig {
+@Configuration // Spring 구성 클래승미 나타냄. Spring Security 설정 포함
+@EnableWebSecurity // Spring Security를 활성화 시킴
+public class SecurityConfig { //6버전 이상 쓰는 문법
 
-    @Bean
-    PasswordEncoder passwordEncoder() {
 
-        return new BCryptPasswordEncoder();
-    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf((csrf) -> csrf.disable()); // crsf 기능 끄기, 배포 전에는 귀찮음.
+
+        http.csrf((csrf) -> csrf.disable());
 
         http.sessionManagement((session) -> session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        ); // 로그인 시, 세션 데이터 생성 x란 뜻
+        ); // session 데이터 생성하지 말라는 코드
 
         http.authorizeHttpRequests((authorize) ->
-                authorize.requestMatchers("/**").permitAll() // 모든 요청 경로 인증없이 허용
-        );
-
+                authorize.requestMatchers("/**").permitAll());
 
         return http.build();
     }
 
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+
+    //filterchain은 유저 요청 + 서버 응답사이 자동으로 실행해주고 싶은 코드 담는 곳, 미들웨어라고함
 }

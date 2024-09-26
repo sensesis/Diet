@@ -12,7 +12,6 @@ import java.util.Optional;
 public class ClothService {
 
     private final ClothRepository clothRepository;
-    private final MemberRepository memberRepositoiry;
 
     public void saveCloth(String name, String type) {
 

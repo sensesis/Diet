@@ -1,57 +1,40 @@
-package com.apple.shop.cream;
+package com.apple.shop.swagger;
 
-import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.tags.Tag;
-import org.springdoc.core.models.GroupedOpenApi;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.models.Components;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.security.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.util.List;
+import org.springframework.context.annotation.Profile;
 
 @Configuration
+@OpenAPIDefinition(
+        info = @Info(
+                title = "00 프로젝트 API 명세서",
+                description = "00 프로젝트에 사용되는 API 명세서",
+                version = "v1"
+        )
+)
 public class SwaggerConfig {
 
-    @Bean
-    public GroupedOpenApi userGroupedOpenApi() {
-        List<Tag> tags = List.of(new Tag().name("UserController").description("유저 API"));
-
-        return GroupedOpenApi
-                .builder()
-                .group("user 2.0")
-                .pathsToMatch("/api/v2/**")
-                .addOpenApiCustomizer(
-                        openApi -> {
-                            openApi.setTags(tags);
-                            openApi.setInfo(
-                                    new Info()
-                                            .title("user api")
-                                            .description("유저 업무 처리를 위한 API")
-                                            .version("2.0.0")
-                            );
-                        }
-                )
-                .build();
-    }
+    private static final String BEARER_TOKEN_PREFIX = "Bearer";
 
     @Bean
-    public GroupedOpenApi groupGroupedOpenApi() {
-        List<Tag> tags = List.of(new Tag().name("GroupController").description("그룹 API"));
+    @Profile("!Prod") // 운영 환경에서는 Swagger 비활성화
+    public OpenAPI openAPI() {
+        String jwtSchemeName = "Authorization"; // JwtTokenProvider.AUTHORIZATION_HEADER 대체
+        SecurityRequirement securityRequirement = new SecurityRequirement().addList(jwtSchemeName);
+        Components components = new Components()
+                .addSecuritySchemes(jwtSchemeName, new SecurityScheme()
+                        .name(jwtSchemeName)
+                        .type(SecurityScheme.Type.HTTP)
+                        .scheme(BEARER_TOKEN_PREFIX)
+                        .bearerFormat("JWT")); // JwtTokenProvider.TYPE 대체
 
-        return GroupedOpenApi
-                .builder()
-                .group("group 1.0")
-                .pathsToMatch("/api/v1/**")
-                .addOpenApiCustomizer(
-                        openApi -> {
-                            openApi.setTags(tags);
-                            openApi.setInfo(
-                                    new Info()
-                                            .title("group api")
-                                            .description("그룹 업무 처리를 위한 API")
-                                            .version("1.0.0")
-                            );
-                        }
-                )
-                .build();
+        return new OpenAPI()
+                .addSecurityItem(securityRequirement)
+                .components(components);
     }
 }
