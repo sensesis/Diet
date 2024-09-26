@@ -1,3 +1,26 @@
+# 루트 build 디렉토리 무시
+/build/
+
+# 모든 build 디렉토리 무시 (옵션 2 사용 시)
+/build/
+build/
+
+# 기타 기존 패턴
+/out/
+
+# IDE 설정 파일
+.idea/gradle.xml
 .idea/
+*.iml
+
+# OS별 파일
+.DS_Store
+Thumbs.db
+
+# Gradle 캐시 파일
 backend/.gradle/
 *.lock
+
+/db
+
+.env
