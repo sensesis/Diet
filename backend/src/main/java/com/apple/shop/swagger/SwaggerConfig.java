@@ -1,4 +1,4 @@
-package com.apple.shop.swagger;
+package com.apple.shop.cream;
 
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.tags.Tag;
