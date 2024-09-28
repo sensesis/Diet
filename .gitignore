@@ -21,6 +21,6 @@ Thumbs.db
 backend/.gradle/
 *.lock
 
-/db
+/db/
 
 .env
