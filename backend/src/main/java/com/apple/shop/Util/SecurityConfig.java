@@ -21,12 +21,14 @@ public class SecurityConfig { //6버전 이상 쓰는 문법
 
         http.csrf((csrf) -> csrf.disable());
 
-        http.sessionManagement((session) -> session
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        ); // session 데이터 생성하지 말라는 코드
+//        http.sessionManagement((session) -> session
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//        ); // session 데이터 생성하지 말라는 코드
 
-        http.authorizeHttpRequests((authorize) ->
-                authorize.requestMatchers("/**").permitAll());
+        http.authorizeHttpRequests(authorize -> authorize
+                .requestMatchers("**").permitAll()
+                .anyRequest().authenticated()
+        );
 
         return http.build();
     }
