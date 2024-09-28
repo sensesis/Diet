@@ -37,6 +37,4 @@ public class User {
     private Double height; // 타입 변경
     private Double weight; // 타입 변경
     private Double body_Fat; // 타입 변경
-    private int age;
-    private String gender;
 }
