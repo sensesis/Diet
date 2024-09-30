@@ -6,17 +6,15 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @PostMapping("/signup")
     @Operation(summary = "Sign Up User", description = "새로운 사용자를 등록합니다.")
@@ -62,7 +61,7 @@ public class UserController {
         return userService.loginUser(userLoginDTO);
     }
 
-    // 사용자 삭제 API
+    // 사용자 로그아웃 API
     @PostMapping("/logout")
     @Operation(summary = "Logout User", description = "사용자 정보를 수정합니다.")
     @ApiResponses(value = {
@@ -81,7 +80,7 @@ public class UserController {
     }
 
     // 사용자 정보수정 API
-    @PostMapping("/update")
+    @PutMapping("/update")
     @Operation(summary = "Update User", description = "사용자 정보를 수정합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "수정 성공",
@@ -93,13 +92,12 @@ public class UserController {
             @ApiResponse(responseCode = "400", description = "잘못된 요청입니다.",
                     content = @Content)
     })
-    public ResponseEntity<?> updateUser(@Valid @RequestBody UserDTO userDTO) {
-
-        return userService.updateUser(userDTO);
+    public ResponseEntity<?> updateUser(@Valid @RequestBody UserUpdateDTO userUpdateDTO) {
+        return userService.updateUser(userUpdateDTO);
     }
 
     // 사용자 삭제 API
-    @PostMapping("/delete")
+    @DeleteMapping("/delete")
     @PreAuthorize("#userDTO.email == authentication.name") // 인증된 사용자만 자신 계정 삭제
     @Operation(summary = "Update User", description = "사용자 정보를 수정합니다.")
     @ApiResponses(value = {
@@ -113,7 +111,23 @@ public class UserController {
                     content = @Content)
     })
     public ResponseEntity<?> DeleteUser(@Valid @RequestBody UserDTO userDTO) {
-
         return userService.deleteUser(userDTO);
+    }
+
+    // 사용자 조회 API
+    @GetMapping("/inquiry")
+    @Operation(summary = "Update User", description = "사용자 정보를 수정합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "조회 성공",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "401", description = "조회 실패",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = String.class))),
+            @ApiResponse(responseCode = "400", description = "잘못된 요청입니다.",
+                    content = @Content)
+    })
+    public ResponseEntity<?> InquiryUser(@RequestParam("email") @Valid @Email(message = "유효한 이메일 형식을 입력하세요.") String email) {
+        return userService.inquiryUser(email);
     }
 }
