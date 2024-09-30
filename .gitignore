@@ -24,3 +24,6 @@ backend/.gradle/
 /db
 
 .env
+db/
+db/*
+db/**/*.*
