@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.security.*;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -36,5 +37,21 @@ public class SwaggerConfig {
         return new OpenAPI()
                 .addSecurityItem(securityRequirement)
                 .components(components);
+    }
+
+    @Bean
+    public GroupedOpenApi userApi() {
+        return GroupedOpenApi.builder()
+                .group("User API")
+                .pathsToMatch("/api/users/**")
+                .build();
+    }
+
+    @Bean
+    public GroupedOpenApi foodApi() {
+        return GroupedOpenApi.builder()
+                .group("Food API")
+                .pathsToMatch("/api/foods/**")
+                .build();
     }
 }
