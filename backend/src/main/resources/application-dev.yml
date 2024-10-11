@@ -1,3 +1,0 @@
-spring:
-  elasticsearch:
-    uris: http://es:9200
