@@ -34,8 +34,3 @@ springdoc:
   # Swagger UI에 노출할 컨트롤러 경로 패턴
   paths-to-match:
     - /api/**
-
-  #elasticsearch 설정
-  spring:
-    profiles:
-      active: dev
