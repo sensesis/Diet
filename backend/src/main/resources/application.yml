@@ -39,7 +39,3 @@ springdoc:
   spring:
     profiles:
       active: dev
-    elasticsearch:
-      uris: http://es:9200
-      username: root
-      password: 1234
