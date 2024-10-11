@@ -9,10 +9,10 @@ services:
       - "8080:8080"
     container_name: diet_app
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://database:3306/${MYSQL_DATABASE}?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true
-      - SPRING_DATASOURCE_USERNAME=${MYSQL_USER}
-      - SPRING_DATASOURCE_PASSWORD=${MYSQL_PASSWORD}
-      - SPRING_PROFILES_ACTIVE=dev
+      SPRING_DATASOURCE_URL: "jdbc:mysql://database:3306/${MYSQL_DATABASE}?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false&allowPublicKeyRetrieval=true"
+      SPRING_DATASOURCE_USERNAME: "${MYSQL_USER}"
+      SPRING_DATASOURCE_PASSWORD: "${MYSQL_PASSWORD}"
+      SPRING_PROFILES_ACTIVE: "dev"
     networks:
       - diet_network
 
@@ -20,21 +20,55 @@ services:
     image: mysql:8.0
     container_name: diet_db
     environment:
-      - MYSQL_DATABASE=${MYSQL_DATABASE}
-      - MYSQL_USER=${MYSQL_USER}
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
     ports:
       - "3306:3306"
     volumes:
-      - ./db/diet_data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
+    command: --lower_case_table_names=1 --skip-host-cache --skip-name-resolve
     networks:
       - diet_network
     healthcheck:
-      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 10s
       timeout: 5s
       retries: 5
 
+  es:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.5.3
+    container_name: es
+    environment:
+      - node.name=es-node
+      - cluster.name=search-cluster
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - xpack.security.http.ssl.enabled=false
+      - xpack.security.transport.ssl.enabled=false
+    ports:
+      - "9200:9200" # http
+      - "9300:9300" # tcp
+    networks:
+      - diet_network
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.5.3
+    container_name: kibana
+    environment:
+      SERVER_NAME: kibana
+      ELASTICSEARCH_HOSTS: http://es:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - es
+    networks:
+      - diet_network
+
 networks:
   diet_network:
+    driver: bridge
+
+volumes:
+  mysql-data:
