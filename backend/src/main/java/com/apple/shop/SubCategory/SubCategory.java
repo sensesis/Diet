@@ -2,17 +2,15 @@ package com.apple.shop.SubCategory;
 
 import com.apple.shop.Brand.Brand;
 import com.apple.shop.Food.Food;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "subcategory")
-@Getter
-@Setter
 public class SubCategory {
 
     @Id
@@ -22,10 +20,11 @@ public class SubCategory {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "brand_id") // 조인 컬럼 이름 확인
+    @JoinColumn(name = "brand_id")
+    @JsonBackReference
     private Brand brand;
 
-    @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL)
-    private List<Food> foods = new ArrayList<>();
-}
+    @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Food> foods;
 
+}
