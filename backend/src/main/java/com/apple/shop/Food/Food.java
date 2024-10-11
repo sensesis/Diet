@@ -1,16 +1,17 @@
 package com.apple.shop.Food;
 
+import com.apple.shop.Brand.Brand;
 import com.apple.shop.Nutrition.Nutrition;
 import com.apple.shop.SubCategory.SubCategory;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "food")
-@Getter
-@Setter
 public class Food {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,10 +19,14 @@ public class Food {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "subcategory_id") // 조인 컬럼 이름 수정
+    @JoinColumn(name = "brand_id")
+    @JsonBackReference
+    private Brand brand;
+
+    @ManyToOne
+    @JoinColumn(name = "sub_category_id")
     private SubCategory subCategory;
 
-    @OneToOne(mappedBy = "food", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "food", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Nutrition nutrition;
 }
-

@@ -2,19 +2,19 @@ package com.apple.shop.Food;
 
 import com.apple.shop.Brand.Brand;
 import com.apple.shop.Brand.BrandRepository;
+import com.apple.shop.Category.Category;
 import com.apple.shop.Category.CategoryRepository;
 import com.apple.shop.Nutrition.Nutrition;
 import com.apple.shop.SubCategory.SubCategory;
 import com.apple.shop.SubCategory.SubCategoryRepository;
 import jakarta.transaction.Transactional;
-import com.apple.shop.Category.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class FoodService {
 
-    @Autowired // bean 자동 주입
+    @Autowired
     private CategoryRepository categoryRepository;
 
     @Autowired
@@ -26,7 +26,7 @@ public class FoodService {
     @Autowired
     private FoodRepository foodRepository;
 
-    @Transactional // 실행중 오류나면 변경 사항 롤백
+    @Transactional
     public void createFood(FoodRequestDTO requestDTO) {
         // 1. 카테고리 처리
         Category category = categoryRepository.findByName(requestDTO.getCategory())
@@ -59,6 +59,7 @@ public class FoodService {
         Food food = new Food();
         food.setName(foodDTO.getName());
         food.setSubCategory(subCategory);
+        food.setBrand(brand); // Brand 설정 추가
 
         // 영양성분 설정
         FoodRequestDTO.NutritionDTO nutritionDTO = foodDTO.getNutrition();
