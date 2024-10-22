@@ -1,0 +1,19 @@
+/* Filter CSS */
+.filter-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px auto;
+    width: 970px;
+}
+
+.filter-button {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+    background-color: white;
+    cursor: pointer;
+}
+
+.filter-select {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
