@@ -1,0 +1,120 @@
+.header {
+    width: 100%;                     /* 화면 전체 너비 사용 */
+    max-width: 1920px;               /* 최대 너비를 1920px로 제한 */
+    height: 90px;                    /* 헤더 높이 */
+    background: #ffffff;             /* 배경 흰색 */
+    margin: 0 auto;                  /* 가로축 중앙 정렬 */
+    box-sizing: border-box;          /* 패딩과 테두리를 포함하여 전체 크기 계산 */
+    display: flex;                   /* 플렉스 컨테이너로 설정 */
+    justify-content: space-between;  /* 내부 요소들을 양 끝으로 배치 */
+    align-items: center;             /* 세로 방향 가운데 정렬 */
+    padding: 0 60px;                 /* 양쪽 여백 */
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 76px;                       /* 메뉴 항목 간의 간격 */
+}
+
+.logo {
+    font-family: "Pretendard-Bold", sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: #191919;                  /* 로고 색상 */
+}
+
+.nav-menu {
+    display: flex;
+    gap: 76px;                       /* 각 메뉴 항목 간의 간격 */
+    align-items: center;
+    list-style: none;                /* 기본 리스트 점 스타일 제거 */
+    padding: 0;
+    margin: 0;
+}
+
+.nav-item {
+    font-family: "Pretendard-Medium", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #191919;
+}
+
+.login-section {
+    display: flex;
+    align-items: center;
+    gap: 33px;                       /* Login 텍스트와 아이콘 사이 간격 */
+}
+
+.login-icon {
+    width: 31.57px;
+    height: 31.85px;
+    vertical-align: middle;
+}
+/*--------------------------*/
+a {
+    text-decoration: none;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style: none;
+}
+
+.noto {
+    font-family: 'Noto Sans CJK KR-Reqular', sans-serif;
+    font-size: 400px;
+}
+
+#headerType {}
+.header__wrap {}
+.header__inner {
+    width: 100%;
+    height: 70px;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    font-family: "Pretendard-Medium", sans-serif;
+    font-size: 16px;
+    border-bottom: 1px solid #ffffff;
+}
+.header__logo {
+    font-family: "Pretendard-Bold", sans-serif;
+    font-size: 24px;
+    color: #191919;
+    margin-left: 315px;
+}
+
+.header__menu {}
+.header__menu ul {}
+.header__menu li {
+    display: inline;
+}
+.header__menu li a {
+    color: #191919;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 33px;
+    transition: background-color 0.33s;
+}
+.header__menu li a:hover {
+
+    background-color: #f1f1f1;
+    border-radius: 5px;
+}
+
+.header__member {
+
+    text-align: right;
+    margin-right: 320px;
+}
+.header__member a {
+    font-size: 16px;
+    padding: 10px 30px;
+}
