@@ -1,130 +1,214 @@
-/* fonts */
-@import url('https://webfontworld.github.io/NexonLv1Gothic/NexonLv1Gothic.css');
-
-.nexon {
-    font-family: 'NexonLv1Gothic';
-    font-weight: 400;
-}
-
-/* reset */
-* {
-    margin: 0;
-    padding: 0;
-}
-a {
-    text-decoration: none;
-    color: #000;
-}
-.blind {
-    width: 0;
-    height: 0;
-    line-height: 0;
-    overflow: hidden;
-    position: absolute;
-    text-indent: -9999px;
-}
-.ir {
-    display: block;
-    overflow: hidden;
-    font-size: 0;
-    line-height: 0;
-    text-indent: -9999px;
-}
-
-/* sliderType */
-.slider {
-    position: relative;
-}
-.slider__img {
-    background: url(../../../assets/images/slider_bg01.jpg) no-repeat center center / cover;
-    display: flex; /* Flexbox 활성화 */
-    justify-content: center; /* 수평 중앙 정렬 */
-    align-items: center; /* 수직 중앙 정렬 */
-    height: 500px; /* 이미지의 높이에 맞추어 설정, 또는 원하는 높이 */
-    position: relative; /* 필요한 경우, 위치 설정 */
-
-}
-.slider__img .desc {
-    max-width: 1160px; /* 최대 너비 설정 */
+/* 슬라이드 이미지 래퍼 */
+.slider__img-wrapper {
     width: 100%;
-    text-align: center; /* 텍스트를 수평으로 중앙 정렬 */
-    padding: 20px; /* 적절한 패딩 설정 */
-    box-sizing: border-box; /* 패딩 포함한 박스 크기 계산 */
-
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    margin-top: 0; /* 상단 여백 제거 */
 }
-.slider__img .desc span {
-    font-size: 16px;
-    background-color: #fff;
-    padding: 1px 14px 0 14px;
-    border-radius: 30px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    display: inline-block;
 
+/* 슬라이드 이미지 */
+.slider__img {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    transform: translateX(100%);
+    z-index: 1;
 }
+
+.slider__img.active {
+    opacity: 1;
+    transform: translateX(0);
+    z-index: 2;
+}
+
+.slider__img.prevSlide {
+    transform: translateX(-100%);
+}
+
+.slider__img.nextSlide {
+    transform: translateX(100%);
+}
+
+/* 온보딩 텍스트 중앙 정렬 */
+.slider__img .desc {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff;
+    z-index: 3;
+    margin: 0; /* 여백 제거 */
+}
+
 .slider__img .desc h3 {
     font-size: 40px;
-    font-weight: 300;
-    line-height: 1;
-    color: #fff;
-    font-family: "Pretendard-SemiBold", sans-serif;
-    text-transform: uppercase;
-    margin-bottom: 16px;
-    margin-left: -8px;
-    text-align: center;
+    font-weight: 700;
+    margin: 0 0 20px 0; /* 상단 여백 제거, 하단 여백 유지 */
+    font-family: 'Pretendard-SemiBold', sans-serif;
 }
+
 .slider__img .desc p {
-    font-size: 20px;
-    font-weight: 300;
-    color: #fff;
-    line-height: 1.35;
-    margin-bottom: 130px;
-    text-align: center;
-}
-.slider__img .desc .btn a {
     font-size: 16px;
-    background: #fff;
-    padding: 11px 50px;
-    display: inline-block;
+    font-weight: 400;
+    margin: 0; /* 여백 제거 */
+    font-family: 'Pretendard-Regular', sans-serif;
 }
-.slider__img .desc .btn a.black {
-    background: #000;
-    color: #fff;
+
+/* 화살표 버튼 스타일 */
+.slider__arrow {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: 5;
 }
-.slider__arrow a {
+
+.slider__arrow button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 30px;
-    height: 56px;
-    background-image: url(../../../assets/images/slider_icon.svg);
 }
-.slider__arrow a.left {
+
+.slider__arrow .left {
     left: 20px;
 }
-.slider__arrow a.right {
+
+.slider__arrow .right {
     right: 20px;
-    background-position: -50px 0;
 }
+
+.slider__arrow img {
+    width: 100%;
+    height: 100%;
+}
+
+/* 도트 버튼 스타일 */
 .slider__dot {
     position: absolute;
+    bottom: 20px;
     left: 50%;
-    bottom: 25px;
     transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 4;
 }
-.slider__dot a {
+
+.slider__dot button {
     display: inline-block;
     width: 16px;
     height: 16px;
-    background-image: url(../../../assets/images/slider_bg01.jpg);
-    background-position: -20px -70px;
+    background: url('../../../assets/images/listicon1.png') no-repeat center;
+    background-size: 6px 6px;
+    border: none;
+    margin: 0 5px;
+    cursor: pointer;
+    vertical-align: middle;
 }
-.slider__dot a.active {
-    background-position: 0px -70px;
+
+.slider__dot button.active {
+    background: url('../../../assets/images/listicon2.png') no-repeat center;
+    background-size: 12px 12px;
 }
-.slider__dot a.play {
-    background-position: -40px -70px;
+
+/* 기본 태그의 여백 제거 */
+h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+    padding: 0;
 }
-.slider__dot a.stop {
-    background-position: -60px -70px;
+
+/* 반응형 웹을 위한 미디어 쿼리 */
+@media screen and (max-width: 1024px) {
+    .slider__img-wrapper {
+        height: 400px;
+    }
+
+    .slider__img .desc h3 {
+        font-size: 32px;
+    }
+
+    .slider__img .desc p {
+        font-size: 14px;
+    }
+
+    .slider__arrow button {
+        width: 40px;
+        height: 40px;
+    }
+
+    .slider__arrow .left {
+        left: 15px;
+    }
+
+    .slider__arrow .right {
+        right: 15px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .slider__img-wrapper {
+        height: 300px;
+    }
+
+    .slider__img .desc h3 {
+        font-size: 24px;
+    }
+
+    .slider__img .desc p {
+        font-size: 12px;
+    }
+
+    .slider__arrow button {
+        width: 30px;
+        height: 30px;
+    }
+
+    .slider__arrow .left {
+        left: 10px;
+    }
+
+    .slider__arrow .right {
+        right: 10px;
+    }
+
+    .slider__dot {
+        bottom: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .slider__img-wrapper {
+        height: 200px;
+    }
+
+    .slider__img .desc h3 {
+        font-size: 18px;
+    }
+
+    .slider__img .desc p {
+        font-size: 10px;
+    }
+
+    .slider__arrow button {
+        width: 20px;
+        height: 20px;
+    }
+
+    .slider__dot button {
+        width: 12px;
+        height: 12px;
+    }
 }

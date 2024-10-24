@@ -1,44 +1,48 @@
+// src/components/Header/Header.jsx
+
 import React from 'react';
 import './Header.css';
 import loginIcon from '../../../assets/images/mypage.png';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Header() {
+    const navigate = useNavigate();
+
+    const handleLogoClick = () => {
+        navigate('/');
+    };
+
+    const handleIconClick = () => {
+        // 아이콘 클릭 시 원하는 동작 추가
+        navigate('/login');
+    };
+
     return (
-        // <header className="header">
-        //     <div className="header-nav">
-        //         <div className="logo">SALPAPEYO</div>
-        //         <nav>
-        //             <ul className="nav-menu">
-        //                 <li className="nav-item">브랜드/음식검색</li>
-        //                 <li className="nav-item">메뉴 비교</li>
-        //                 <li className="nav-item">외식등급표</li>
-        //                 <li className="nav-item">게시판</li>
-        //             </ul>
-        //         </nav>
-        //         <div className="login-section">
-        //             <span>Login</span>
-        //             <img src={loginIcon} alt="Login Icon" className="login-icon"/>
-        //         </div>
-        //     </div>
-        // </header>
-        <header id="headerType" class="header__wrap noto">
+        <header id="headerType" className="header__wrap noto">
             <div className="header__inner">
-                <div className="header__logo">SALPPAEYO</div>
-                <nev class="header__menu">
+                <div className="header__logo" onClick={handleLogoClick}>
+                    SALPPAEYO
+                </div>
+                <nav className="header__menu">
                     <ul>
-                        <li><a href="#" class="hover">브랜드/음식검색</a></li>
-                        <li><a href="#">메뉴비교</a></li>
-                        <li><a href="#">외식등급표</a></li>
-                        <li><a href="#">게시판</a></li>
+                        <li><Link to="/search">브랜드/음식검색</Link></li>
+                        <li><Link to="/compare">메뉴비교</Link></li>
+                        <li><Link to="/ratings">외식등급표</Link></li>
+                        <li><Link to="/board">게시판</Link></li>
                     </ul>
-                </nev>
+                </nav>
                 <div className="header__member">
-                    <a>Login</a>
-                    <img src={loginIcon} alt="Login Icon" className="login-icon"/>
+                    <a onClick={() => navigate('/login')}>Login</a>
+                    <img
+                        src={loginIcon}
+                        alt="Login Icon"
+                        className="login-icon"
+                        onClick={handleIconClick}
+                    />
                 </div>
             </div>
         </header>
-);
+    );
 }
 
 export default Header;

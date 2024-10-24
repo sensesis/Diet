@@ -1,39 +1,133 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Slider.css';
-import loginIcon from '../../../assets/images/mypage.png';
+import slides from './slider_data';
 
-class Slider extends React.Component {
-    render() {
-        return (
-            <section id="sliderType" className="slider__wrap nexon">
-                <h2 className="blind">슬라이드 유형</h2>
-                <div className="slider__inner">
-                    <div className="slider">
-                        <div className="slider__img">
-                            <div className="desc">
-                                <h3>최악의 상황에서 최선을 다해라</h3>
-                                <p>
-                                    외식은 다이어트에 도전이 될 수 있지만, 포기하지 마세요. 저희는 신선한 재료와 건강한 선택지를 추천하여 외식에서도 목표를 지킬 수<br/>
-                                    있도록 도와드립니다. 현명한 선택으로 건강한 삶을 이어가세요
-                                </p>
-                            </div>
-                        </div>
+import leftArrow from '../../../assets/images/left_arrow.png';
+import rightArrow from '../../../assets/images/right_arrow.png';
+
+function Slider() {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isAnimating, setIsAnimating] = useState(false);
+    const autoSlideTimeout = useRef(null);
+
+    const slideLength = slides.length;
+
+    const nextSlide = () => {
+        if (isAnimating) return;
+        setIsAnimating(true);
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % slideLength);
+    };
+
+    const prevSlide = () => {
+        if (isAnimating) return;
+        setIsAnimating(true);
+        setCurrentIndex((prevIndex) =>
+            prevIndex === 0 ? slideLength - 1 : prevIndex - 1
+        );
+    };
+
+    // 자동 슬라이드 타이머 재설정 함수
+    const resetAutoSlide = () => {
+        if (autoSlideTimeout.current) {
+            clearTimeout(autoSlideTimeout.current);
+        }
+        autoSlideTimeout.current = setTimeout(() => {
+            nextSlide();
+        }, 5000);
+    };
+
+    // currentIndex가 변경될 때마다 실행
+    useEffect(() => {
+        setIsAnimating(true);
+        resetAutoSlide();
+
+        const timer = setTimeout(() => {
+            setIsAnimating(false);
+        }, 500); // 애니메이션 시간과 동일하게 설정
+
+        return () => {
+            clearTimeout(timer);
+        };
+    }, [currentIndex]);
+
+    // 컴포넌트가 언마운트될 때 타이머 정리
+    useEffect(() => {
+        resetAutoSlide();
+
+        return () => {
+            if (autoSlideTimeout.current) {
+                clearTimeout(autoSlideTimeout.current);
+            }
+        };
+    }, []);
+
+    return (
+        <section id="sliderType" className="slider__wrap nexon">
+            <h2 className="blind">슬라이드 유형</h2>
+            <div className="slider__inner">
+                <div className="slider">
+                    <div className="slider__img-wrapper">
+                        {slides.map((slide, index) => {
+                            let className = 'slider__img';
+                            if (index === currentIndex) {
+                                className += ' active';
+                            } else if (
+                                index === (currentIndex - 1 + slideLength) % slideLength
+                            ) {
+                                className += ' prevSlide';
+                            } else if (
+                                index === (currentIndex + 1) % slideLength
+                            ) {
+                                className += ' nextSlide';
+                            }
+
+                            return (
+                                <div
+                                    key={slide.id}
+                                    className={className}
+                                    style={{
+                                        backgroundImage: `url(${slide.image})`,
+                                    }}
+                                >
+                                    <div className="desc">
+                                        <h3>{slide.title}</h3>
+                                        <p>{slide.description}</p>
+                                    </div>
+                                </div>
+                            );
+                        })}
+
+                        {/* 화살표 버튼 */}
                         <div className="slider__arrow">
-                            <a href="/frontend/public" className="left"><span className="ir">이전 이미지</span></a>
-                            <a href="/frontend/public" className="right"><span className="ir">다음 이미지</span></a>
+                            <button onClick={() => { prevSlide(); resetAutoSlide(); }} className="slider__arrow-button left">
+                                <img src={leftArrow} alt="이전 이미지" />
+                            </button>
+                            <button onClick={() => { nextSlide(); resetAutoSlide(); }} className="slider__arrow-button right">
+                                <img src={rightArrow} alt="다음 이미지" />
+                            </button>
                         </div>
+
+                        {/* 도트 버튼 */}
                         <div className="slider__dot">
-                            <a href="/frontend/public" className="dot active"><span className="ir">1</span></a>
-                            <a href="/frontend/public" className="dot"><span className="ir">2</span></a>
-                            <a href="/frontend/public" className="dot"><span className="ir">3</span></a>
-                            <a href="/frontend/public" className="play"><span className="ir">플레이</span></a>
-                            <a href="/frontend/public" className="stop"><span className="ir">정지</span></a>
+                            {slides.map((slide, index) => (
+                                <button
+                                    key={slide.id}
+                                    className={`dot ${
+                                        currentIndex === index ? 'active' : ''
+                                    }`}
+                                    onClick={() => {
+                                        if (isAnimating || index === currentIndex) return;
+                                        setCurrentIndex(index);
+                                        resetAutoSlide(); // 타이머 재설정
+                                    }}
+                                />
+                            ))}
                         </div>
                     </div>
                 </div>
-            </section>
-        );
-    }
+            </div>
+        </section>
+    );
 }
 
 export default Slider;

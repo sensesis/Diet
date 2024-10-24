@@ -1,120 +1,94 @@
-.header {
-    width: 100%;                     /* 화면 전체 너비 사용 */
-    max-width: 1920px;               /* 최대 너비를 1920px로 제한 */
-    height: 90px;                    /* 헤더 높이 */
-    background: #ffffff;             /* 배경 흰색 */
-    margin: 0 auto;                  /* 가로축 중앙 정렬 */
-    box-sizing: border-box;          /* 패딩과 테두리를 포함하여 전체 크기 계산 */
-    display: flex;                   /* 플렉스 컨테이너로 설정 */
-    justify-content: space-between;  /* 내부 요소들을 양 끝으로 배치 */
-    align-items: center;             /* 세로 방향 가운데 정렬 */
-    padding: 0 60px;                 /* 양쪽 여백 */
-}
-
-.header-nav {
-    display: flex;
-    align-items: center;
-    gap: 76px;                       /* 메뉴 항목 간의 간격 */
-}
-
-.logo {
-    font-family: "Pretendard-Bold", sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    color: #191919;                  /* 로고 색상 */
-}
-
-.nav-menu {
-    display: flex;
-    gap: 76px;                       /* 각 메뉴 항목 간의 간격 */
-    align-items: center;
-    list-style: none;                /* 기본 리스트 점 스타일 제거 */
-    padding: 0;
-    margin: 0;
-}
-
-.nav-item {
-    font-family: "Pretendard-Medium", sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    color: #191919;
-}
-
-.login-section {
-    display: flex;
-    align-items: center;
-    gap: 33px;                       /* Login 텍스트와 아이콘 사이 간격 */
-}
-
-.login-icon {
-    width: 31.57px;
-    height: 31.85px;
-    vertical-align: middle;
-}
-/*--------------------------*/
-a {
-    text-decoration: none;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-}
-
-li {
-    list-style: none;
-}
-
-.noto {
-    font-family: 'Noto Sans CJK KR-Reqular', sans-serif;
-    font-size: 400px;
-}
-
-#headerType {}
-.header__wrap {}
-.header__inner {
+/* 기본 헤더 스타일 */
+.header__wrap {
     width: 100%;
-    height: 70px;
-    background-color: #ffffff;
+    background-color: #fff;
+    border-bottom: 1px solid #eaeaea;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
+.header__inner {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
-    font-family: "Pretendard-Medium", sans-serif;
-    font-size: 16px;
-    border-bottom: 1px solid #ffffff;
-}
-.header__logo {
-    font-family: "Pretendard-Bold", sans-serif;
-    font-size: 24px;
-    color: #191919;
-    margin-left: 315px;
-}
-
-.header__menu {}
-.header__menu ul {}
-.header__menu li {
-    display: inline;
-}
-.header__menu li a {
-    color: #191919;
-    text-decoration: none;
     padding: 10px 20px;
-    margin: 0 33px;
-    transition: background-color 0.33s;
+    flex-wrap: nowrap; /* 메뉴가 수평을 유지하도록 설정 */
 }
-.header__menu li a:hover {
 
-    background-color: #f1f1f1;
-    border-radius: 5px;
+.header__logo {
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.header__menu ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 76px; /* 메뉴 간의 기본 간격을 76px로 설정 */
+    flex-wrap: nowrap; /* 메뉴 항목이 줄 바꿈 되지 않도록 설정 */
+}
+
+.header__menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    white-space: nowrap; /* 텍스트가 줄 바꿈 되지 않도록 설정 */
 }
 
 .header__member {
-
-    text-align: right;
-    margin-right: 320px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
+
 .header__member a {
+    text-decoration: none;
+    color: #333;
     font-size: 16px;
-    padding: 10px 30px;
+    cursor: pointer;
+}
+
+.login-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+/* 반응형 디자인을 위한 미디어 쿼리 */
+@media (max-width: 1024px) {
+    .header__inner {
+        padding: 10px 20px;
+    }
+
+    .header__menu ul {
+        gap: 40px; /* 중간 화면 크기에서는 메뉴 간격을 줄임 */
+    }
+
+    .header__menu a {
+        font-size: 15px; /* 중간 화면에서는 폰트 크기 축소 */
+    }
+}
+
+@media (max-width: 768px) {
+    .header__inner {
+        padding: 10px 15px;
+        justify-content: space-between;
+    }
+
+    .header__menu ul {
+        gap: 20px; /* 작은 화면에서 메뉴 간격을 줄임 */
+    }
+
+    .header__menu a {
+        font-size: 14px; /* 작은 화면에서는 폰트 크기 더 축소 */
+    }
+
+    .header__member a {
+        font-size: 14px;
+    }
 }

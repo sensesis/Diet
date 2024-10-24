@@ -1,30 +1,50 @@
-/* SearchBar CSS */
-.search-container {
+/* src/components/main/SearchBar/SearchBar.css */
+
+#search {
     display: flex;
     align-items: center;
-    margin: 20px auto;
-    width: 970px;
-    height: 80px;
-    border-radius: 100px;
-    border: 1.5px solid #9D9D9D;
-    background-color: #FFFFFF;
+    justify-content: center;
+    margin: 40px auto; /* 세로로 여백을 주고, 좌우 중앙으로 정렬 */
+    width: 80%; /* 전체 페이지의 80% 너비로 설정 */
+    max-width: 800px; /* 최대 너비를 제한하여 지나치게 커지지 않도록 설정 */
+    background-color: #ffffff; /* 배경색 추가로 명확하게 구분 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자를 추가하여 검색창 강조 */
+    padding: 10px;
+    border-radius: 8px; /* 전체 검색 바를 둥글게 만들어 현대적인 느낌으로 */
 }
 
-.search-input {
-    flex-grow: 1;
-    border: none;
-    outline: none;
-    padding: 0 20px;
-    font-size: 16px;
+#input {
+    flex: 1; /* 입력 필드가 최대한 공간을 차지하도록 설정 */
+    padding: 16px; /* padding을 더 추가하여 크기를 키움 */
+    font-size: 18px; /* 글씨 크기를 키워 가독성 향상 */
+    border: 1px solid #ccc;
+    border-radius: 4px 0 0 4px; /* 왼쪽 모서리를 둥글게 */
+    height: 50px; /* 높이를 설정하여 크기를 더 키움 */
+    box-sizing: border-box; /* 패딩을 포함하여 크기를 계산하도록 설정 */
 }
 
-.search-button {
-    background: none;
-    border: none;
+#button {
+    padding: 16px; /* 버튼 패딩을 더 크게 설정 */
+    background-color: #007bff;
+    border: 1px solid #007bff;
+    border-left: none; /* 버튼과 입력창의 경계선이 겹치지 않도록 설정 */
     cursor: pointer;
+    color: white;
+    border-radius: 0 4px 4px 0; /* 오른쪽 모서리를 둥글게 */
+    height: 50px; /* 입력 필드와 동일한 높이로 설정 */
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 버튼 내부 아이콘도 중앙에 정렬되도록 */
+    box-sizing: border-box; /* 패딩을 포함하여 크기를 계산하도록 설정 */
 }
 
-.search-icon {
-    width: 20px;
-    height: 20px;
+#button i {
+    font-size: 20px; /* 아이콘 크기를 키워 더 명확하게 보이도록 설정 */
+}
+
+.note {
+    margin-top: 16px; /* 여백을 조금 늘려 검색 창과 텍스트 간 간격을 조정 */
+    font-size: 16px;
+    color: #555;
+    text-align: center; /* 노트 텍스트를 가운데로 정렬 */
 }
