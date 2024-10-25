@@ -109,19 +109,26 @@
 
 .slider__dot button {
     display: inline-block;
-    width: 16px;
-    height: 16px;
-    background: url('../../../assets/images/listicon1.png') no-repeat center;
-    background-size: 6px 6px;
+    width: 10px;
+    height: 10px;
+    background-color: transparent;
+    background-image: url('../../../assets/images/slider/listicon1.png');
+    background-repeat: no-repeat;
+    background-size: contain;  /* 이미지 크기를 맞춰줌 */
+    background-position: center;  /* 이미지를 중앙에 위치시킴 */
     border: none;
     margin: 0 5px;
+    padding: 0;
     cursor: pointer;
     vertical-align: middle;
+    background-color: transparent;  /* 배경 투명 */
+    outline: none;  /* 선택된 상태의 테두리 제거 */
 }
 
 .slider__dot button.active {
-    background: url('../../../assets/images/listicon2.png') no-repeat center;
-    background-size: 12px 12px;
+    background-image: url('../../../assets/images/slider/listicon2.png');
+    background-size: contain;
+    background-position: center;
 }
 
 /* 기본 태그의 여백 제거 */

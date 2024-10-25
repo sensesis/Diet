@@ -1,8 +1,6 @@
-// src/components/Header/Header.jsx
-
 import React from 'react';
 import './Header.css';
-import loginIcon from '../../../assets/images/mypage.png';
+import loginIcon from '../../../assets/images/slider/mypage.png';
 import { useNavigate, Link } from 'react-router-dom';
 
 function Header() {
@@ -13,7 +11,6 @@ function Header() {
     };
 
     const handleIconClick = () => {
-        // 아이콘 클릭 시 원하는 동작 추가
         navigate('/login');
     };
 

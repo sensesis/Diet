@@ -1,15 +1,25 @@
-// src/components/main/Footer.jsx
+// Footer.jsx 또는 Footer.js
 import React from 'react';
+import './Footer.css'; // CSS 파일 임포트
+import { useNavigate } from 'react-router-dom';
 
-const Footer = () => {
+function Footer() {
+    const navigate = useNavigate();
+
+    const handleInquiryClick = () => {
+        // 문의하기 페이지로 이동
+        navigate('/inquiry');
+    };
+
     return (
-        <footer className="bg-[#242424] text-white flex justify-center items-center h-20">
-            <div className="flex space-x-4">
-                <span>무엇을 도와드릴까요?</span>
-                <a href="#" className="text-[#f4993e]">문의하기</a>
+        <footer className="footer">
+            <div className="footer-content">
+                <span className="footer-brand">SALPPAEYO</span>
+                <span className="footer-text">무엇을 도와드릴까요?</span>
+                <button className="footer-inquiry" onClick={handleInquiryClick}>문의하기</button>
             </div>
         </footer>
     );
-};
+}
 
 export default Footer;

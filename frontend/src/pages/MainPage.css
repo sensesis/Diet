@@ -1,34 +1,10 @@
-/* src/pages/MainPage.css */
-
-.main-page-container {
+/* MainPage.css */
+.main-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px; /* 메인 페이지의 최대 너비 설정 */
-    margin: 0 auto; /* 중앙 정렬 */
+    min-height: 100vh; /* 화면 전체 높이 확보 */
 }
 
-.main-content {
-    width: 100%;
-    padding: 20px;
-}
-
-.hero-section {
-    background-size: cover;
-    background-position: center;
-    text-align: center;
-    color: white;
-    padding: 100px 20px;
-}
-
-.hero-section h2 {
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-
-.hero-section p {
-    font-size: 1.2rem;
-    max-width: 800px;
-    margin: 0 auto;
+.content {
+    flex: 1; /* 남은 공간을 모두 차지하여 푸터를 아래로 밀어냄 */
 }
