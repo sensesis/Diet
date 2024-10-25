@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Slider.css';
-import slides from './slider_data';
+import slides from './SliderData';
 
-import leftArrow from '../../../assets/images/left_arrow.png';
-import rightArrow from '../../../assets/images/right_arrow.png';
+import leftArrow from '../../../assets/images/slider/left_arrow.png'; // 경로 수정
+import rightArrow from '../../../assets/images/slider/right_arrow.png'; // 경로 수정
 
 function Slider() {
     const [currentIndex, setCurrentIndex] = useState(0);

@@ -1,0 +1,93 @@
+/* Footer.css */
+.footer {
+    width: 100%;
+    height: 84px;
+    background-color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* 왼쪽과 오른쪽에 균등하게 배치 */
+    color: #fff;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+
+.footer-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+}
+
+/* SALPPAEYO 브랜드 텍스트 스타일 */
+.footer-brand {
+    font-family: 'Pretendard-Bold', sans-serif;
+    font-size: 24px; /* 기본 폰트 크기 */
+    font-weight: bold;
+}
+
+/* "무엇을 도와드릴까요?" 텍스트 스타일 */
+.footer-text {
+    font-family: 'Pretendard-Medium', sans-serif;
+    font-size: 18px; /* 기본 폰트 크기 */
+}
+
+/* 문의하기 버튼 스타일 */
+.footer-inquiry {
+    font-family: 'Pretendard-Medium', sans-serif;
+    font-size: 18px; /* 기본 폰트 크기 */
+    color: #f4993e;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+}
+
+/* 반응형 웹을 위한 미디어 쿼리 */
+@media screen and (max-width: 1024px) {
+    .footer {
+        height: 70px;
+        padding: 8px 15px;
+    }
+
+    .footer-brand {
+        font-size: 20px;
+    }
+
+    .footer-text,
+    .footer-inquiry {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        height: 60px;
+        padding: 6px 10px;
+    }
+
+    .footer-brand {
+        font-size: 18px;
+    }
+
+    .footer-text,
+    .footer-inquiry {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .footer {
+        height: 50px;
+        padding: 5px 8px;
+    }
+
+    .footer-brand {
+        font-size: 16px;
+    }
+
+    .footer-text,
+    .footer-inquiry {
+        font-size: 12px;
+    }
+}

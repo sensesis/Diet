@@ -1,8 +1,8 @@
 // src/components/Slider/slider_data.js
 
-import slide1 from '../../../assets/images/slide1.jpg';
-import slide2 from '../../../assets/images/slide2.png';
-import slide3 from '../../../assets/images/slide3.png';
+import slide1 from '../../../assets/images/slider/slide1.jpg';
+import slide2 from '../../../assets/images/slider/slide2.png';
+import slide3 from '../../../assets/images/slider/slide3.png';
 
 const slides = [
     {

@@ -57,6 +57,7 @@
     width: 24px;
     height: 24px;
     cursor: pointer;
+    margin-left: 20px;
 }
 
 /* 반응형 디자인을 위한 미디어 쿼리 */

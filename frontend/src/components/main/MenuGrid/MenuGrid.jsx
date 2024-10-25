@@ -1,17 +1,14 @@
+// MenuGrid.jsx
 import React from 'react';
-import FoodCard from '../FoodCard';
-
-const foodData = [
-    { id: 1, name: '싸이버거', rating: 4.0, calories: 574, protein: 12, imageUrl: '/images/cyburger.jpg' },
-    { id: 2, name: '싸이버거', rating: 4.0, calories: 574, protein: 12, imageUrl: '/images/cyburger.jpg' },
-    // ... 다른 음식들
-];
+import './MenuGrid.css';
+import FoodData from './FoodData';
+import Card from '../Card/Card';
 
 const MenuGrid = () => {
     return (
         <div className="menu-grid">
-            {foodData.map((food) => (
-                <FoodCard key={food.id} food={food} />
+            {FoodData.map((food) => (
+                <Card key={food.id} {...food} />
             ))}
         </div>
     );
