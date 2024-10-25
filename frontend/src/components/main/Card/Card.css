@@ -1,79 +1,126 @@
 .card {
-    width: 420px;
-    height: auto;
-    margin: 20px;
+    width: 100%;
+    max-width: 412px;
+    aspect-ratio: 412 / 460;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    padding: 24px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    box-sizing: border-box;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    position: relative; /* 내부 요소 위치 조정을 위한 설정 */
 }
 
 .card-image {
     width: 100%;
-    height: 235px;
+    height: auto;
     object-fit: cover;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-radius: 8px;
 }
 
 .card-content {
-    padding: 20px;
-    font-family: 'Pretendard', sans-serif;
+    width: 100%;
+    margin-top: 16px;
+    position: relative;
 }
 
-.card-title {
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: #333;
+.title {
+    font-family: 'Pretendard SemiBold', sans-serif;
+    font-size: 22px;
+    color: #191919;
+    margin-bottom: 8px;
 }
 
-.card-rating {
+/* stars-rating 수정: 모든 요소를 왼쪽 정렬로 조정 */
+.stars-rating {
+    display: flex;
+    align-items: center; /* 모든 요소의 세로 중앙 정렬 */
+    justify-content: flex-start; /* 왼쪽 정렬로 변경 */
+    margin-bottom: 16px;
+    gap: 4px; /* 요소들 간의 간격 */
+}
+
+.stars {
+    display: flex;
+    align-items: center; /* 별을 수직 중앙 정렬 */
+    gap: 1px; /* 별 사이의 간격 최소화 */
+}
+
+.star {
+    width: 16px;
+    height: 14px;
+}
+
+/* rating 위치를 조금 위로 올리기 */
+.rating {
+    font-family: 'Pretendard Regular', sans-serif;
+    font-size: 14px;
+    color: #191919;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 4px;
+    justify-content: center;
+}
+
+/* brand 요소의 위치를 조금 아래로 조정 */
+.brand {
+    font-family: 'Pretendard Regular', sans-serif;
+    font-size: 14px;
+    color: #191919;
+    line-height: 1;
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: flex-start; /* 왼쪽으로 밀착 배치 */
+    margin-left: 4px; /* 평점과의 간격 최소화 */
+    position: relative;
+}
+
+.nutrition {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 16px;
     margin-bottom: 16px;
 }
 
-.card-star {
-    width: 20px;
-    height: 20px;
-}
-
-.card-category {
-    font-size: 1rem;
-    color: #777;
-}
-
-.card-info {
-    font-size: 1rem;
-    color: #555;
-    line-height: 1.5;
-    margin-bottom: 20px;
-}
-
-.card-button {
-    background-color: #f4993e;
-    color: #ffffff;
-    border: none;
-    padding: 12px;
+.nutrition-item {
     text-align: center;
-    cursor: pointer;
-    border-radius: 6px;
-    transition: background-color 0.3s ease;
-    font-family: 'Pretendard', sans-serif;
+    width: 100%;
 }
 
-.card-button:hover {
-    background-color: #d87f32;
+.nutrition-label {
+    margin-bottom: 4px;
+    font-family: 'Pretendard Regular', sans-serif;
+    font-size: 14px;
+    color: #191919;
+}
+
+.nutrition .value {
+    margin-top: 4px;
+    padding: 8px 12px;
+    background-color: #f0f0f0;
+    border-radius: 10%;
+    font-family: 'Pretendard SemiBold', sans-serif;
+    font-size: 14px;
+    margin: 2px;
+}
+
+.details {
+    margin-top: 16px;
+    font-family: 'Pretendard SemiBold', sans-serif;
+    font-size: 14px;
+    color: #191919 !important;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.card .allow {
+    width: 12px !important;
+    height: 12px !important;
+    margin-left: 4px !important;
+    object-fit: contain !important;
 }
