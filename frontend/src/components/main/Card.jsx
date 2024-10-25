@@ -1,43 +1,79 @@
-// src/components/main/Card.jsx
+// Card.jsx
 import React from 'react';
+import './Card.css';
 
-const Card = () => {
+const Card = ({ name, category, rating, calories, protein, sugar, image }) => {
+    // 별점 렌더링 함수
+    const renderStars = (rating) => {
+        const stars = [];
+        const fullStars = Math.floor(rating); // 채워진 별의 개수
+        const halfStar = rating % 1 >= 0.5; // 반 별 여부
+        const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
+
+        // 채워진 별 추가
+        for (let i = 0; i < fullStars; i++) {
+            stars.push(
+                <img
+                    key={`full-${i}`}
+                    src="/assets/images/star_full.png"
+                    alt="Full Star"
+                    className="star"
+                />
+            );
+        }
+
+        // 반 별 추가
+        if (halfStar) {
+            stars.push(
+                <img
+                    key="half"
+                    src="/assets/images/star_half.png"
+                    alt="Half Star"
+                    className="star"
+                />
+            );
+        }
+
+        // 빈 별 추가
+        for (let i = 0; i < emptyStars; i++) {
+            stars.push(
+                <img
+                    key={`empty-${i}`}
+                    src="/assets/images/star_empty.png"
+                    alt="Empty Star"
+                    className="star"
+                />
+            );
+        }
+
+        return stars;
+    };
+
     return (
-        <div className="bg-white shadow-md rounded-lg overflow-hidden">
-            <img
-                src="https://via.placeholder.com/400x300" // 임시 이미지 URL
-                alt="메뉴 이미지"
-                className="w-full h-64 object-cover"
-            />
-            <div className="p-4">
-                <h3 className="text-xl font-semibold text-gray-900">
-                    싸이버거
-                </h3>
-                <p className="text-gray-600">맘스터치</p>
-                {/* 별점 */}
-                <div className="flex items-center mt-2">
-                    <span className="text-yellow-500">★ ★ ★ ★ ☆</span>
-                    <span className="ml-2 text-gray-600">(4.0)</span>
+        <div className="card">
+            <img src={image} alt={name} className="card-image" />
+            <div className="card-content">
+                <div className="title">{name}</div>
+                <div className="stars-rating">
+                    <div className="stars">{renderStars(rating)}</div>
+                    <div className="rating">({rating})</div>
+                    <div className="brand">{category}</div>
                 </div>
-                {/* 영양 정보 */}
-                <div className="flex justify-between mt-4 text-center text-gray-600">
+                <div className="nutrition">
                     <div>
-                        <p className="text-sm">칼로리</p>
-                        <p className="text-base">574</p>
+                        <div>칼로리</div>
+                        <div className="value">{calories}kcal</div>
                     </div>
                     <div>
-                        <p className="text-sm">단백질</p>
-                        <p className="text-base">12g</p>
+                        <div>단백질</div>
+                        <div className="value">{protein}g</div>
                     </div>
                     <div>
-                        <p className="text-sm">당</p>
-                        <p className="text-base">12g</p>
+                        <div>당</div>
+                        <div className="value">{sugar}g</div>
                     </div>
                 </div>
-                {/* 자세히 알아보기 */}
-                <button className="mt-4 w-full py-2 text-gray-800 border border-gray-300 rounded-md">
-                    자세히 알아보기
-                </button>
+                <div className="details">자세히 알아보기</div>
             </div>
         </div>
     );

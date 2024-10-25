@@ -1,23 +1,189 @@
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
-    gap: 20px;
-    justify-content: center;
-    margin: 20px;
-    padding: 0 320px;
+    grid-template-columns: repeat(3, 1fr); /* 큰 화면에서 3개로 고정 */
+    gap: 36px 22px; /* 행 간격 36px, 열 간격 22px */
+    width: 100%;
+    max-width: 1280px; /* 최대 너비를 1280px로 제한 */
+    margin: 0 auto; /* 그리드를 가운데 정렬 */
+    padding-top: 36px;
+    padding-bottom: 36px;
     box-sizing: border-box;
 }
 
-@media screen and (max-width: 768px) {
+/* 중간 크기 화면 설정 - 태블릿 */
+@media (max-width: 1024px) {
     .menu-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        padding: 0 40px;
+        grid-template-columns: repeat(2, 1fr); /* 중간 크기에서 카드 2개 */
     }
 }
 
-@media screen and (max-width: 480px) {
+/* 작은 화면 설정 - 모바일 */
+@media (max-width: 640px) {
     .menu-grid {
-        grid-template-columns: 1fr;
-        padding: 0 20px;
+        grid-template-columns: 1fr; /* 작은 화면에서 카드 1개 */
+    }
+}
+
+/* 카드 디자인 */
+.card {
+    width: 100%; /* 카드가 그리드 셀의 너비를 모두 사용하도록 설정 */
+    max-width: 400px; /* 카드의 최대 너비 설정 (너무 커지지 않도록 제한) */
+    aspect-ratio: 3 / 4; /* 카드의 가로 세로 비율을 더 유연하게 변경 */
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 1em; /* 상대적인 단위 사용 */
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    margin: auto; /* 카드를 그리드 셀 중앙에 배치 */
+}
+
+/* 카드 내부 이미지 */
+.card-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* 카드 내용 */
+.card-content {
+    width: 100%;
+    margin-top: 16px;
+    position: relative;
+}
+
+/* 제목 */
+.title {
+    font-family: 'Pretendard SemiBold', sans-serif;
+    font-size: 1.25em; /* 상대적인 단위 사용 */
+    color: #191919;
+    text-align: left;
+    margin-bottom: 8px;
+}
+
+/* 별점 */
+.stars-rating {
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: flex-start; /* 왼쪽 정렬 */
+    margin-bottom: 16px;
+    gap: 4px;
+}
+
+.stars {
+    display: flex;
+    align-items: center;
+    gap: 1px; /* 별 사이의 간격 최소화 */
+}
+
+.star {
+    width: 16px;
+    height: 14px;
+}
+
+/* 평점 숫자 */
+.rating {
+    font-family: 'Pretendard Regular', sans-serif;
+    font-size: 0.9em;
+    color: #191919;
+    line-height: 1;
+    margin-left: 4px;
+    padding: 0;
+    position: relative;
+    top: 2px; /* 평점 위치를 약간 위로 조정 */
+}
+
+/* 브랜드명 */
+.brand {
+    font-family: 'Pretendard Regular', sans-serif;
+    font-size: 0.9em;
+    color: #191919;
+    margin-left: 4px;
+    line-height: 1;
+    position: relative;
+    top: 2px; /* 브랜드명 위치를 약간 위로 조정 */
+}
+
+/* 영양 정보 */
+.nutrition {
+    display: flex;
+    justify-content: space-between; /* 양쪽 끝에 정렬 */
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+.nutrition-item {
+    text-align: center;
+    width: 100%;
+}
+
+.nutrition-label {
+    font-family: 'Pretendard Regular', sans-serif;
+    font-size: 0.9em;
+    color: #191919;
+    margin-bottom: 4px;
+}
+
+.nutrition .value {
+    padding: 4px 8px; /* 기존 가로 크기를 줄여서 좌우 공간 확보 */
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    font-family: 'Pretendard SemiBold', sans-serif;
+    font-size: 0.9em;
+}
+
+/* '자세히 알아보기' 버튼 */
+.details {
+    margin-top: auto; /* 아래쪽으로 밀기 */
+    font-family: 'Pretendard Regular', sans-serif;
+    font-size: 0.9em;
+    color: #0000ee;
+    cursor: pointer;
+    text-decoration: underline;
+    text-align: left;
+}
+
+.show-more-container {
+    margin-bottom: 18px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.show-more-button {
+    width: 242px;
+    height: 56px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 28px;
+    font-family: 'Pretendard Regular', sans-serif;
+    font-size: 16px;
+    color: #191919;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+}
+
+.show-more-button:hover {
+    background-color: #f5f5f5;
+}
+
+/* 반응형 카드 설정 */
+@media (max-width: 768px) {
+    .card {
+        aspect-ratio: 4 / 5; /* 작은 화면에서는 더 높은 비율로 조정 */
+        padding: 0.8em; /* 패딩을 줄여서 콘텐츠의 공간을 확보 */
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        aspect-ratio: 5 / 6; /* 작은 화면에서 카드를 더 높게 조정 */
+        max-width: 90%; /* 전체 화면 너비의 90%만 사용하도록 설정 */
+        padding: 0.5em;
     }
 }
